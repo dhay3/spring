@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <!--    自定义的类型转换器-->
+<!--    <bean id="myConvert" class="org.chz.convert.MyConvert"/>-->
+<!--&lt;!&ndash;           定义类型转换添加一个converters属性,还要将conversionService注册到annotation-driven中&ndash;&gt;&ndash;&gt;-->
+<!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
+<!--        &lt;!&ndash;        converters是一个set集合用于存放转换器&ndash;&gt;-->
+<!--        <property name="converters">-->
+<!--            <set>-->
+<!--                <ref bean="myConvert"/>-->
+<!--            </set>-->
+<!--        </property>-->
+<!--    </bean>-->
+</beans>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="all_collection" class="test.test3.AllCollection">
+        <!-- list,set,map,array,properties赋值及空字符和null的赋值-->
+        <!--        一般指定数据类型,properties标签没有value属性,子标签有-->
+        <!--        如果要加入特殊符号如<>,&
+                    1.在字符串中 &lt;表示<(less than)   &amp;表示&  &gt;表示>(great than)
+                    2.在标签内  <![CDATA[]]> 任意符号
+        -->
+        <!--        list ioc 中间标签value-->
+        <property name="listEle">
+<!--            也可以不用加value-type-->
+            <list value-type="java.lang.String">
+                <value>足球</value>
+                <value>篮球</value>
+                <value>乒乓球</value>
+            </list>
+        </property>
+        <!--        array ioc 中间标签value-->
+        <property name="arrayEle">
+            <array value-type="java.lang.Integer">
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+            </array>
+        </property>
+        <!--            map ioc 中间标签entry-->
+        <property name="mapEle">
+            <map key-type="java.lang.String" value-type="java.lang.String">
+                <entry key="no1" value="zs"/>
+                <entry key="no2" value="ls"/>
+                <entry key="no3" value="ww"/>
+                <!--                <entry>  可以怎么写但是不推荐-->
+                <!--                    <key>-->
+                <!--                        <value>no4</value>-->
+                <!--                    </key>-->
+                <!--                    <value>dy</value>-->
+                <!--                </entry>-->
+            </map>
+        </property>
+        <!--        set ioc 中间标签value-->
+        <property name="setEle">
+            <set value-type="java.lang.String">
+                <value>harry</value>
+                <value>henry</value>
+                <value>hally</value>
+            </set>
+        </property>
+        <!--        properties ioc 中间标签 prop-->
+        <property name="propEle">
+            <props>
+                <prop key="a">北京</prop>
+                <prop key="b">南极</prop>
+                <prop key="c">美国</prop>
+            </props>
+        </property>
+
+        <!--        通过构造器赋值 同理其他-->
+        <constructor-arg name="listEle" type="java.util.List">
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+            </list>
+        </constructor-arg>
+
+        <!--        <property name="propEle">-->
+        <!--            <null/>-->
+        <!--            如果要赋null中间为null标签-->
+        <!--        </property>-->
+        <!--            不存在-->
+        <!--        <property name="propEle" value="null"/>-->
+
+        <!--        <property name="propEle">-->
+        <!--            <value/> 如果要赋""中间标签为value -->
+        <!--        </property>-->
+        <!--            或-->
+        <!--        <property name="propEle" value=""/> 直接在标签的属性value=""-->
+    </bean>
+</beans>

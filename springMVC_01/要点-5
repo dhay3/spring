@@ -1,0 +1,15 @@
+springMVC实现文件上传 commons-io commons-file-upload
+依赖于CommonsMultipartResolver,id必需是multipartResolver,可以通过设置参数来限制上传的文件
+前端form enctype必需是multipart/form-data且提交方式必需是post,后端接受参数MultipartFile
+可以通过HttpServletRequest获取文件根目录(request.getServletContext().getRealPath("/");)
+getOriginalFilename获取上传的文件名,transferTO写入指定位置
+
+springMVC处理异常@ExceptionHandler(只处理当前类的异常)默认捕获Exception,可以指定异常捕获,
+参数有且只有一个Exception或是他的子类(可以为空,但不能有model,put,modelAndView,封装类,属性..)
+@ControllerAdvice全局异常处理类,如果有全局的异常处理类就走全局的异常处理类
+@ResponseStatus修饰方法时,当前方法一定会抛出异常(code指定的error),如果方法中没有异常,方法会执行完
+修饰类时(自定义异常),需要主动抛出异常
+
+springMVC表单标签,用于接收后端传的值,通过model来传值,
+参数必须是封装对象,key必须是command,根据set方法注入,必须要有默认构造器
+path是封装对象的属性

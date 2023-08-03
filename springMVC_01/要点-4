@@ -1,0 +1,40 @@
+FormattingConversionServiceFactoryBean
+配置数据格式化 注解 所依赖的bean
+添加注解格式化date对象,前端按照pattern格式传值,后端才能接收到
+@DateTimeFormat(pattern = "yy-MM-dd")
+Date date;
+类型转换ConversionServiceFactoryBean 格式化FormattingConversionServiceFactoryBean
+格式化的bean是类型转换的bean的子类(直接用格式化的bean处理类习转换)
+
+BindingResult用于保存前一个参数的错误信息,两者之间不能有其他任何参数,前端不再显示错误,后端显示错误
+如果想要前端显示错误,将BindingResult放入到request域中,前端通过el表达式获取,需导入标签库
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+后端如果要求的参数是八种基本类型时,前端必须给值不能为空
+如果后端是封装的对象时,前端不包含后端的对象的属性时,后端默认处理
+如:前端没有age,后端接收的age就是0,如果id未传值就会报错
+id:<input type="text" name="id"/>
+username:<input type="text" name="username"/>
+
+JSR303 需要导入validation-api,hibernate-validator jar包 <mvc:annotation-driven/>
+@NotNull修饰基本类型,@NotBlank修饰字符串,@NotEmpty修饰集合和数组和set
+如果前端的type是date类型的时候接收的类型也应该是date,默认传值的方式是yyyy-MM-dd
+后端应添加一个springMVC自带的注解@DateFormat("yyyy-MM-dd")用来接收数据,否则接收的数据为null
+
+ajax 需要jackson-core 和 jackson-annotations
+实现ajax要加注解@ResponseBody,不经过视图解析器,不跳转到页面,只有是超链接或是表单形式提交时才会跳转到页面
+如果返回的是对象必需加getter和setter
+
+springMVC拦截器要实现HandlerInterceptor,支持链式拦截
+preHandler请求之前,postHandler请求之后,afterCompletion渲染之后(只有当前的interceptor的preHandle返回时true才执行)
+需要在ioc中配置
+<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/hello"/>
+            <bean class="org.chz.interceptor.MyInterceptor1"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/hello"/>
+            <bean class="org.chz.interceptor.MyInterceptor2"/>
+        </mvc:interceptor>
+</mvc:interceptors>

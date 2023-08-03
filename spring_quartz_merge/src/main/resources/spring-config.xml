@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+                           http://www.springframework.org/schema/task
+                           http://www.springframework.org/schema/task/spring-task-3.1.xsd
+
+">
+<!--    quartz注解式注入必须要开启任务-->
+    <task:annotation-driven/>
+    <context:component-scan base-package="com.chz"/>
+    <bean id="scheduleJob" class="com.chz.pojo.ScheduleJob" >
+        <property name="jobId" value="j001"/>
+        <property name="jobName" value="任务一"/>
+        <property name="jobGroup" value="任务组一"/>
+        <property name="jobStatus" value="1"/>
+        <property name="cronExpression" value="0/5 * * * * ? 2020"/>
+        <property name="desc" value="描述"/>
+    </bean>
+    <!--    jobDetail-->
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <!--            指实现job接口的类,jobClass是Class类型的用value+全类名-->
+        <property name="jobClass" value="com.chz.pojo.PlanJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <!--                    将配置的类注入到JobDetailFactoryBean中-->
+                <entry key="scheduleJOb" value-ref="scheduleJob"/>
+            </map>
+        </property>
+    </bean>
+    <!--        触发器(包含cronExpression和jobDetail)-->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!--           spring配置文件中也可以用spEL 通过id.property-name获取到value-->
+        <property name="cronExpression" value="#{scheduleJob.cronExpression}"/>
+        <property name="jobDetail" ref="jobDetail"/>
+<!--        设置延迟加载-->
+        <property name="startDelay" value="5000"/>
+    </bean>
+    <!--    调度器直接调用触发器(包含jobDetail),配置方式是指lazy-init不生效-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+            <property name="triggers">
+                <list>
+<!--                    参数类型是一个对象时-->
+                    <ref bean="cronTrigger"/>
+                </list>
+            </property>
+    </bean>
+</beans>

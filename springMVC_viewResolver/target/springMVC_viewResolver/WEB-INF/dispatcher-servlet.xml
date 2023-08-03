@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+<!--    专门用于处理servlet-->
+    <context:component-scan base-package="org.chz.handler"/>
+    <!--    welcome请求被springMVC处理，进入springMVC除path包含的url之外，其他所有url都被拦截
+            不经过@RequestMapping直接跳转到view-name(还是会经视图解析器增加前缀和后缀)
+            如果想让@RequestMapping不被拦截，加入<mvc:annotation-driven/>即可
+            -->
+    <mvc:view-controller path="/welcome" view-name="fakeWorld"/>
+    <!--    springMVC的基础配置,可以让@RequestMapping和view-controller共存（死配置).同时也是一个类型转换器-->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <!--   1.静态资源放行方式 静态资源能被springMVC拦截,如果springMVC没有匹配的url就会让tomcat默认的servlet处理-->
+    <mvc:default-servlet-handler/>
+    <!--    2.静态资源放行方式,mapping对应访问的url,location对应的是静态资源存放位置-->
+    <!--    <mvc:resources mapping="/html/**" location="/html/"/>-->
+
+<!--    &lt;!&ndash;    将自定义转换器纳入ioc&ndash;&gt;-->
+<!--    <bean id="myConverter" class="org.chz.converter.MyConverter"/>-->
+
+
+
+    <!--        springMVC解析jsp文件时默认使用InternalResourceView
+                解析,但是当发现jsp中存在jstl语言时用子类JstlView解析,实现不同地区不同语言显示-->
+    <!--    InternalResourceViewResolver针对jsp的视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--        加载国际化资源文件,要用jstl包,在MVC响应时介入(即return时做response),直接跳转无效,
+                且必需要有id,同时id名必须是messageSource才会生效-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <!--            basename基名-->
+        <property name="basename" value="i18n"/>
+    </bean>
+</beans>

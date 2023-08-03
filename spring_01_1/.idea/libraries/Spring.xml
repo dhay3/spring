@@ -1,0 +1,30 @@
+<component name="libraryTable">
+  <library name="Spring" type="spring">
+    <CLASSES>
+      <root url="jar://D:/jar包/aopalliance-1.0.jar!/" />
+      <root url="jar://D:/jar包/commons-logging-1.2.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-aop-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-aspects-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-beans-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-context-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-context-support-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-core-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-expression-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-instrument-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-instrument-tomcat-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-jdbc-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-jms-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-messaging-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-orm-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-oxm-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-test-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-tx-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-web-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-webmvc-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-webmvc-portlet-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-websocket-4.3.9.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

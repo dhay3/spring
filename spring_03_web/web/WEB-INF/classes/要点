@@ -1,0 +1,9 @@
+web项目拆分
+i.按三层分
+    test.servlet -->applicationController.xml
+    test.service(bo) -->applicationService.xml
+    test.dao -->applicationDao.xml
+    database,公共 -->applicationDB.xml
+ii.按功能结构分
+    一个类一个
+合并配置文件

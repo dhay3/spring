@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="70fc3f69-bfa2-48fe-9c7e-fa675e98e4b1" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\maven\repository" />
+        <option name="userSettingsFile" value="D:\maven\apache-maven-3.6.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="useMavenOutput" value="false" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="vmOptions" value="-Dfile.encoding=GBK" />
+  </component>
+  <component name="ProjectId" id="1YU5cXU68zVot77tLx838eJKk52" />
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Demo/Test" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workspace for spring\spring_01_1\src" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="spring_01_1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="70fc3f69-bfa2-48fe-9c7e-fa675e98e4b1" name="Default Changelist" comment="" />
+      <created>1582984411594</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582984411594</updated>
+      <workItem from="1582984414406" duration="1535000" />
+      <workItem from="1582989060121" duration="691000" />
+      <workItem from="1583035543122" duration="626000" />
+      <workItem from="1583045742313" duration="110000" />
+      <workItem from="1583396822795" duration="64000" />
+      <workItem from="1583404682225" duration="10000" />
+      <workItem from="1583404702207" duration="132000" />
+      <workItem from="1583405150063" duration="1222000" />
+      <workItem from="1583488982662" duration="802000" />
+      <workItem from="1583588808324" duration="33000" />
+      <workItem from="1584529660332" duration="187000" />
+      <workItem from="1587966021757" duration="13000" />
+      <workItem from="1589202827391" duration="672000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="361" y="71" key="#Project_Structure" timestamp="1582984440409">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="71" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1582984440409" />
+    <state x="445" y="153" key="FileChooserDialogImpl" timestamp="1589203498369">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="445" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1589203498369" />
+    <state width="1138" height="203" key="GridCell.Tab.0.bottom" timestamp="1582987764067">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1138" height="203" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582987764067" />
+    <state width="1138" height="203" key="GridCell.Tab.0.center" timestamp="1582987764067">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1138" height="203" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582987764067" />
+    <state width="1138" height="203" key="GridCell.Tab.0.left" timestamp="1582987764067">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1138" height="203" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582987764067" />
+    <state width="1138" height="203" key="GridCell.Tab.0.right" timestamp="1582987764067">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1138" height="203" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582987764067" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1582984603281">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582984603281" />
+    <state x="152" y="0" key="new project wizard" timestamp="1582985200487">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="152" y="0" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1582985200487" />
+    <state x="449" y="95" key="spring file set editor" timestamp="1582984461276">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="449" y="95" key="spring file set editor/0.0.1536.824@0.0.1536.824" timestamp="1582984461276" />
+  </component>
+</project>

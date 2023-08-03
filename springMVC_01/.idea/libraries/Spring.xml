@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="Spring" type="spring">
+    <CLASSES>
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-aop-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-aspects-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-beans-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-context-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-context-support-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-core-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-expression-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-jdbc-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-test-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/spring-4.3.9-jar/spring-tx-4.3.9.RELEASE.jar!/" />
+      <root url="jar://D:/jar包/aopalliance-1.0.jar!/" />
+      <root url="jar://D:/jar包/aspectjweaver-1.9.5.jar!/" />
+      <root url="jar://D:/jar包/commons-logging-1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

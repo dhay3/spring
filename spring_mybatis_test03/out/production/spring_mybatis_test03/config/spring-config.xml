@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+">
+    <context:component-scan base-package="service"/>
+    <context:property-placeholder location="classpath:dbcpConfig.properties"/>
+    <!--    <bean id="config" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">-->
+    <!--        <property name="location" value="classpath:dbcpConfig.properties"/>-->
+    <!--    </bean>-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--        mybatis必须加,相当于sqlConfig中指定mapper的路径,可以添加多个mapper-->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:dao/UserDaoMapper.xml</value>
+                <value>classpath:dao/AccountDaoMapper.xml</value>
+            </list>
+        </property>
+        <!--        或是<property name="mapperLocations" value="dao/*.xml"-->
+        <!--        配置别名-->
+        <property name="typeAliasesPackage" value="dto"/>
+    </bean>
+    <!--    批量产生对应接口的mapper,产生的bean name是接口的名字和类型-->
+    <bean id="mappers" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--        如果当前配置中只有一个sqlSessionFactory可以省去该属性-->
+        <!--        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+        <!--        不需配置sqlSessionFactory,指定包路径-->
+        <property name="basePackage" value="dao"/>
+        <!--        传入多个包用逗号或是分号隔开包-->
+        <!--        <property name="basePackage" value="dao;dto"/>-->
+    </bean>
+
+    <bean id="service" class="service.UserService">
+<!--        配置对应接口的实体类-->
+        <property name="userDao" ref="IUserDao"/>
+    </bean>
+
+<!--    如果需要添加事务操作-->
+<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--    </bean>-->
+<!--    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+</beans>

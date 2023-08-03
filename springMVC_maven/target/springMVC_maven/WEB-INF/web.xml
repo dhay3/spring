@@ -1,0 +1,54 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+    <!--    将ioc容器中的内容置为全局变量
+  (如果ioc放在web-inf且文件名叫applicationContext.xml下可以不要context-param配置)-->
+    <!--    一般采用在web.xml中加载主配置文件，在著配置文件中加载其他配置文件-->
+    <context-param>
+        <!--        对应监听器父类的CONFIG_LOCATION_PARAM属性-->
+        <param-name>contextConfigLocation</param-name>
+        <!--   ioc容器的位置,ClassPath指的是web-inf/classes和web-inf/lib)
+               resource folder的文件加也会加入到ClassPath中
+              如果在src中就可以不用采用applicationContext来命名ioc
+              -->
+        <param-value>
+            <!--            如果要加载多个配置文件(一般在applicationContext.xml中import其他的配置文件)-->
+            <!--            1.-->
+            <!--            /WEB-INF/applicationContext-Dao.xml,-->
+            <!--            /WEB-INF/applicationContext-Service.xml,-->
+            <!--            /WEB-INF/applicationContext.xml,-->
+            <!--            2.  通过通配符加载全部配置文件-->
+            <!--            /WEB-INF/applicationContext*.xml-->
+            <!--            3.  通过配置主文件，加载其他配置文件-->
+            /WEB-INF/applicationContext.xml
+        </param-value>
+    </context-param>
+    <!--    配置tomcat服务器启动的监听器-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <servlet>
+        <!--        默认(不指定init-param)按照名字找配置文件servlet-name+ -servlet.xml-->
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--        dispatcher-servlet.xml是处理servlet请求的ioc
+                   如果在web-inf下且叫做dispatcher-servlet.xml可以不用配置,反之要配置init-param
+       -->
+        <!--        <init-param>-->
+        <!--        contextConfigLocation是DispatcherServlet中的一个属性-->
+        <!--            <param-name>contextConfigLocation</param-name>-->
+        <!--            <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>-->
+        <!--        </init-param>-->
+        <!--        项目启动时自动加载servlet(调用init()方法),拦截了指定servlet-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <!--        拦截所有请求-->
+        <!--        可以通过url设置是否拦截请求,/*.do表示末尾是.do的所有url被springMVC拦截-->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>

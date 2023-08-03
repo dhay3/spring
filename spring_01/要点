@@ -1,0 +1,24 @@
+@Component通过默认构造器注入ioc
+
+spring 注入可以没有属性,只有setXxx()且必须有形参也能注入,注入的property name是xxx value就是形参的值
+且会在spring启动是调用
+!important
+
+spring 的头文件不写版本号默认本地(导入的jar包)相关的对应的xsd版本
+(如果本地没有xsd文件就会从对应的url中获取),可以指定xsd版本
+如:
+    http://www.springframework.org/schema/context/spring-context-2.0.xsd
+添加xsd url时可以用命名空间前缀调用
+如果想要注解(@component,@controller,@service,@repository)生效要配置扫描器 ,引入context的命名空间
+<context:component-scan base-package="annotation所在的包"/>
+
+字符串中采用特殊字符时 用转义序列
+标签中采用特俗字符时<![CDATA[]]>
+
+如需查看xsd文档在 file 中的spring-schema
+
+@Component和@Value存在时可以不用配置get和set,只能有无参构造器,@Value的所在类也必须是注解形式的或在ioc中注册
+
+@Autowired一般不再属性上声明,在setter和构造器上声明,@AutoWired所在的类必须也是注解形式的
+
+spring属性赋值默认是通过方法反射来设置的,不是通过反射属性来设置(但是出构造器赋值外其他的都是通过默认构造器实例化的) !important

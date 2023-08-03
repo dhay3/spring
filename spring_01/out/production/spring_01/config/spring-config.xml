@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/p
+       http://www.springframework.org/schema/p.xsd
+">
+    <!--    如果采用标签赋值需要在头文件中加xmlns:p="http://www.springframework.org/schema/p" 该文件没有xsd本地文件要联网会报错-->
+    <!--    为了低耦合,采用xml配置文档-->
+    <bean id="student" class="test.test1.Student">
+        <!--        类的属性,赋值默认用set(set高于构造器),通过反射获取属性后(需要无参构造器) 属性.setAccessible(true),属性.set()-->
+                <property name="sno" value="1"/>
+                <property name="name" value="chz"/>
+                <property name="age" value="20"/>
+        <!--&lt;!&ndash;       通过构造器赋值可以不用写无参构造器, 通过构造器赋值(必须按参数的顺序赋值) ，如果采用构造器推荐使用name+value+type的形式-->
+        <!--        <constructor-arg value="2"/>-->
+        <!--        <constructor-arg value="zs"/>-->
+        <!--        <constructor-arg value="22"/>-->
+
+        <!--        可以通过index指定构造器中的第几个参数来赋值-->
+        <!--        <constructor-arg value="ls" index="1"/>-->
+        <!--        <constructor-arg value="3" index="0"/>-->
+        <!--        <constructor-arg value="29" index="2"/>-->
+
+        <!--        可以通过构造器的指定的形参名来赋值-->
+        <!--        <constructor-arg value="ls" name="namei"/>-->
+        <!--        <constructor-arg value="3" name="agei"/>-->
+        <!--        <constructor-arg value="29" name="snoi"/>-->
+
+        <!--        也可以根据类型来指定，但是类型要唯一(全限路径)，可以组合使用-->
+        <constructor-arg value="ls" name="namei" index="1" type="java.lang.String"/>
+        <constructor-arg value="3" name="agei" index="2" type="int"/>
+        <constructor-arg value="29" name="snoi" index="0" type="int"/>
+    </bean>
+
+    <bean id="java" class="test.test1.JavaLearnCourse"/>
+
+    <bean id="cpp" class="test.test1.CPPLearnCourse"/>
+
+    <bean id="course" class="test.test2.Course">
+        <!--        <property name="courseName" value="math"/>-->
+        <!--        <property name="courseHour" value="10"/>-->
+        <!-- 简单类型(8个基本类型+包括String)用value,如果引用类型的属性要用ref-->
+        <!--        <property name="teacher" ref="teacher_one"/>-->
+        <constructor-arg value="eng"/>
+        <constructor-arg value="12"/>
+        <!--        构造器中传引用类型也要用ref-->
+        <constructor-arg ref="teacher_two"/>
+    </bean>
+    <!--    标签赋值 同理引用类型带ref-->
+    <bean id="course_two" class="test.test2.Course"  p:courseName="P.E" p:courseHour="100" p:teacher-ref="teacher_two"/>
+
+    <bean id="teacher_one" class="test.test2.Teacher">
+        <property name="name" value="Henry"/>
+        <property name="age" value="20"/>
+    </bean>
+
+    <bean id="teacher_two" class="test.test2.Teacher">
+        <property name="name" value="Jack"/>
+        <property name="age" value="22"/>
+    </bean>
+
+
+</beans>

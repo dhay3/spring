@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+">
+    <!--    <context:component-scan base-package="org.dao"/>-->
+
+    <!--    第一种导入properties到spring配置文件中,只有一个文件是可以采用这种-->
+    <!--    <context:property-placeholder location="dbcpConfig.properties"/>-->
+
+    <!--    第二种引入properties文件到spring配置文件中-->
+    <bean id="config" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <!--        最好在value中使用classpath-->
+        <property name="location" value="classpath:dbcpConfig.properties"/>
+        <!--        如果是都多个配置文件-->
+        <!--        <property name="locations">-->
+        <!--            <array>-->
+        <!--                <property name="locations" value="dbcpConfig.properties"/>-->
+        <!--                <property name="locations" value="dbcpConfig.properties"/>-->
+        <!--            </array>-->
+        <!--        </property>-->
+    </bean>
+    <!--    数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+    </bean>
+    <!--    mybatis核心类,在mybatis-spring jar中,spring托管mybatis-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--        配置数据源,spring自动提交事务-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--        加载mybatis配置文件SqlConfig-->
+        <!--        配置mapper文件-->
+        <!--        <property name="mapperLocations">-->
+        <!--            <list>-->
+        <!--                <value>classpath:org/dao/userDaoMapper.xml</value>-->
+        <!--            </list>-->
+        <!--        </property>-->
+        <property name="mapperLocations" value="org/dao/userDaoMapper.xml"/>
+        <!--        配置别名-->
+        <property name="typeAliasesPackage" value="org.dto"/>
+    </bean>
+    <!--    dao层(实现类)-->
+    <bean id="userDao" class="org.dao.UserDaoImpl">
+        <!--        让dao层和sqlSessionFactory关联,必须要有sqlSessionFactory 或是sqlSessionTemplate-->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <!--    service层-->
+    <bean id="service" class="org.service.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+</beans>

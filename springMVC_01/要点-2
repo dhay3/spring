@@ -1,0 +1,28 @@
+<mvc:view-controller path="welcome" view-name="fakeWorld"/>
+拦截path(value,url)跳转到view-name经过视图解析器但是不经过语言解析器
+
+<mvc:annotation-driven/>
+访问路径与方法的匹配可以通过注解配置,可以让view-controller与@RequestMapping共存
+且做普通类型转换(如前端String后端int),属性conversion-service可以指定自定义convert
+
+<mvc:default-servlet-handler/>
+静态资源被拦截,如果springMVC没有匹配的url就会让tomcat默认的servlet处理
+
+<mvc:resources mapping="/html/**" location="/html/"/>
+静态资源直接跳转,mapping对应的是url,location对应的是文件的位置
+不会经过视图处理器和语言环境解析器
+
+InternalResourceViewResolver视图解析器
+属性prefix为uri增加前缀,suffix为uri增加后缀,跳转方式是请求转发,所以要在前缀前加/
+
+ResourceBundleMassageSource语言环境解析器
+基名(i18n)_语言_地区.properties
+id必须是massageSource,属性basename基名,对应propertiesBundle的基名
+需要在jsp中引入<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+引用<fmt:message key=""/>key对应prop文件中key
+
+
+ConversionServiceFactoryBean类型转换器工厂
+属性conversionService对应自定义继承Convert的类(需要注入ioc容器中)
+属性converters set<?> ref指向自定义的convert
+最后要加入<mvc:annotation-driven/>属性conversion-service

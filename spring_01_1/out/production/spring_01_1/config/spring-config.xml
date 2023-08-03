@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-2.0.xsd
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+">
+    <!--    操作数据库(数据库事务)需在头文件中加入tx相同的在schemaLocation中也要加入-->
+
+    <!--    配置数据源,需要dbcp jar和pool jar -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="12345"/>
+        <property name="url">
+            <value>jdbc:mysql://localhost:336/mybatis_test?useSSL=false<![CDATA[&]]>serveTimezone=Asia/Shanghai</value>
+        </property>
+        <!--        最大连接数-->
+        <property name="maxActive" value="100"/>
+        <!--        最大空弦数-->
+        <property name="maxIdle" value="6"/>
+    </bean>
+
+    <!--    如不需要事务的操作可以只配置datasource-->
+    <!--    添加事务管理器txManager(依赖于数据源)-->
+<!--    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--        添加数据源属性-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+
+<!--    </bean>-->
+    <!--    增加对事务的支持(依赖于transactionManager)-->
+<!--    <tx:annotation-driven transaction-manager="txManager"/>-->
+
+    <bean id="userDao" class="dao.UserDaoImpl"/>
+
+    <bean id="userService" class="service.UserServiceImpl">
+        <!--        依赖注入userDao-->
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="user" class="dto.User" >
+        <property name="username" value="chz"/>
+        <property name="password" value="1234"/>
+    </bean>
+
+</beans>

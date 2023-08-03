@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName"
+>
+    <!--    如果要所有类都自动装配，在（头文件）beans中加入属性default-autowire-->
+    <!--    自动装配 autowire默认default 只有对象之间的依赖关系才会装配（引用类型），简单类型不会自动装配8个基本数据类型和String-->
+    <!--    Course类中有一个引用类型（ref）属性名正好叫teacher，而ioc容器中恰好有一个javabean的id叫teacher会自动装配-->
+    <!--    byName根据对象属性和ioc中的id对比相同自动装配-->
+    <bean id="autowire_test" class="test.test2.Course">
+        <!--    <bean id="autowire_test" class="test.test2.Course" autowire="byName">-->
+        <!--    <bean id="autowire_test" class="test.test2.Course" autowire="byType">报错-->
+        <!--    方法中有只有一个引用类型的构造器切形参的类型与引用类型的type相同-->
+        <!--    <bean id="autowire_test" class="test.test2.Course" autowire="constructor">-->
+        <property name="courseName" value="math"/>
+        <property name="courseHour" value="100"/>
+    </bean>
+    <bean id="teacher" class="test.test2.Teacher">
+        <property name="name" value="zs"/>
+        <property name="age" value="20"/>
+    </bean>
+</beans>

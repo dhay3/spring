@@ -1,0 +1,20 @@
+要让类中的属性(接口)指向MapperFactoryBean产生的bean,即实现该接口,或是该接口是实现类
+如果mapper文件在resources下要让mapper所在的包名于接口所在的包名路径相同
+dto,entity要默认构造器
+
+第一种方式spring整合mybatis(继承SqlSessionDaoSupport)
+在确保mybatis成功搭建的前提下剔除mybatis总配置文件,将所有信息同写入spring的配置文件
+org.mybatis.spring.SqlSessionFactoryBean
+配置datasource和mapper的引入
+让dao的实现类继承 SqlSessionDaoSupport(为了继承他的sqlSession属性并通过getSession()拿到其sqlSession)
+同时在spring配置文件中要让dao与sqlSessionFactory关联(没找到属性)
+
+第二种方式
+在第一种方式的基础上(不用实现类),在spring配置文件中加入org.mybatis.spring.mapper.MapperFactoryBean
+并配置mapper对应的接口,和对应的sqlSessionFactory(每一个mapper配置一个)
+
+第三种方式(批量实现mapper)
+在第二种方式的基础上,在spring配置文件中加入org.mybatis.spring.mapper.MapperScannerConfigurer
+指定接口的包名(basePackage),不需要配置sqlSessionFactory
+MapperScannerConfigurer会生成对应接口名的bean name是接口名,class是接口
+通过接口名.class或name来获取到实体类

@@ -1,0 +1,20 @@
+welcome-list中的/表示根路径web-inf
+tomcat的servlet中的url-pattern /表示所以的servlet都匹配是用tomcat的默认servlet
+springMVC的servlet中的url-pattern / 表示拦截非文件的url,但是同时也会拦截静态资源(.css .js .html不会拦截.jsp)
+filter中的/不会拦截任何东西,/* 表示拦截所有请求,filter不会拦截请求转发
+
+DispatcherServlet springMVC的拦截器,被拦截的servlet通过dispatcher-servlet.xml
+
+HiddenHttpMethodFilter过滤是PUT|DELETE的请求,形式如下:
+表单的请求方式必须是post
+<input type="hidden" name="_method" value="PUT|DELETE">
+且要将PUT和DELETE想请求的页面设置isErrorPage="true"
+POST-->insert GET-->select PUI-->update DELETE-->delete
+
+CharacterEncodingFilter设置统一编码如:
+<init-param>
+    <param-name>encoding</param-name>
+    <param-value>UTF-8</param-value>
+</init-param>
+
+url中的?表示任意单字符; *表示任意长度字符(任意单个文件,以/分隔); **表示任意文件即子文件

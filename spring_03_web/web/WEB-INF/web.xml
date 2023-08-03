@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!--    将ioc容器中的内容置为全局变量
+    (如果ioc放在web-inf且文件名叫applicationContext.xml下可以不要context-param配置)-->
+    <!--    一般采用在web.xml中加载主配置文件，在著配置文件中加载其他配置文件-->
+    <context-param>
+        <!--        对应监听器父类的CONFIG_LOCATION_PARAM属性-->
+        <param-name>contextConfigLocation</param-name>
+        <!--   ioc容器的位置,ClassPath指的是web-inf/classes和web-inf/lib)
+               resource folder的文件加也会加入到ClassPath中
+              如果在src中就可以不用采用applicationContext来命名ioc
+              -->
+        <param-value>
+            <!--            如果要加载多个配置文件-->
+            <!--            1.-->
+            <!--            /WEB-INF/applicationContext-Dao.xml,-->
+            <!--            /WEB-INF/applicationContext-Service.xml,-->
+            <!--            /WEB-INF/applicationContext.xml,-->
+            <!--            2.  通过通配符加载全部配置文件-->
+            <!--            /WEB-INF/applicationContext*.xml-->
+            <!--            3.  通过配置主文件，加载其他配置文件-->
+            /WEB-INF/applicationContext.xml
+        </param-value>
+    </context-param>
+    <!--    添加tomcat服务器启动的监听器-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--        项目启动时自动加载servlet(调用init()方法),拦截了指定servlet-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.form</url-pattern>
+    </servlet-mapping>
+</web-app>

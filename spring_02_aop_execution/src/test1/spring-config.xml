@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-2.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+">
+    <!--        主体类(需要被增强方法所在的实体类)-->
+    <bean id="main_test" class="test1.MainTest"/>
+    <!--        前置通知类(advice所在的类)-->
+    <bean id="before" class="test1.M_before_advice"/>
+    <bean id="after" class="test1.A_returning_advice"/>
+    <bean id="exception" class="test1.Exception_advice"/>
+    <bean id="interceptor" class="test1.M_interceptor"/>
+    <!--    一个aop:config中只能定义一个pointcut,一个advisor-->
+    <aop:config>
+        <!--        <aop:aspect-->
+        <!--        表示一组join point-->
+        <!--        配置切入点(筛选连接点(包括前后异常)) expression通过反射不需要形参-->
+        <!--        通过or或||连接添加多个表达式可以同时织入pointcut-->
+        <aop:pointcut
+                expression=" execution(public void test1.MainTest.mainFunctionAfter(int,String))
+               || execution(public void test1.MainTest.maniFunctionBefore(String))"
+                id="mainFunction"/>
+        <!--        拿到MainTest中修饰符为public返回值是void的所有方法 *表示所有 .. 表示参数类型任意-->
+        <!--        <aop:pointcut-->
+        <!--                expression=" execution(public void test1.MainTest.*(..))"-->
+        <!--                id="mainFunction"/>-->
+        <!--   aop:advisor和aop:aspect 一样都包括pointcut和advice 但是advisor中引用的类必须实现advice接口-->
+        <!--             织入通知到对应的切入点-->
+        <!--        在执行id mainFunction之前执行before中的指定的方法-->
+        <aop:advisor advice-ref="before" pointcut-ref="mainFunction"/>
+    </aop:config>
+
+    <aop:config>
+        <!--        表示返回值类型是任意的所有方法-->
+        <aop:pointcut expression="execution(* test1.MainTest.maniFunctionBefore(..))" id="beforeFunction"/>
+        <aop:advisor advice-ref="after" pointcut-ref="beforeFunction"/>
+    </aop:config>
+
+    <aop:config>
+        <aop:pointcut expression="execution(* test1.MainTest..*(..))" id="exceptionFunction"/>
+        <aop:advisor advice-ref="exception" pointcut-ref="exceptionFunction"/>
+    </aop:config>
+
+    <aop:config>
+        <aop:pointcut expression="execution(* test1.*.mainFunctionInterceptor(..))" id="interceptorFunction"/>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="exceptionFunction"/>
+    </aop:config>
+</beans>

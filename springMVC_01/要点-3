@@ -1,0 +1,63 @@
+forward和redirect不经过视图解析器也不经过语言环境解析器
+forward和redirect都要写出全路径，redirect请求两次url地址栏改变，forward请求一次url地址栏不变
+
+相对路径不带/时,表示当前路径下的子路径;相对路径带/时,表示根路径的一个子路径
+前端的根路径是http://localhost:端口号/
+后端的根路径是http://localhost:端口号/项目名/
+请求转发的根路径是后端的,重定向是前端的
+如果没有返回值默认返回请求的url,视图解析器会生效
+
+参数存在错误时,在方法中的最后添加BindingResult来获取错误并输出,前端不会展示错误,直接跳转到指定也页面
+
+@RequestMapping默认是value @AliasFor("path")value=path,可以用restful风格传参,接收ant风uri
+参数params拦截包含指定参数(name对应的值)和值的url
+参数method拦截是指定方法的url
+ant风 url中的?表示任意单字符; *表示任意长度字符(任意单个文件,以/分隔); **表示任意文件即子文件
+
+接收参数是封装对象是必需要有getter和setter和默认构造函数,前端的参数个数可以和封装参数的属性个数不一样
+
+restful风接收参数
+@RequestMapping("/hello/{username}")表示前端hello/后的url片段是username
+必需用@PathVariable(有参数纠正作用)指出
+hello(@PathVariable("username") String name)
+普通模式接收参数
+表单形式的可以不用@RequestParam,默认就是形参名接收前端的值,@RequestParam有值参数纠正作用
+当用对象(包括8中基本类型和String)作为参数时,
+会自动将对象(不包括8种基本类型和String)放入request域中默认的参数类型(首字母小写)是key,value是函数对对象操作后的值
+
+后端向前端传值通过Map,ModelMap,Model,ModelAndView,值全都存在request域中
+Map通过put传值     Model通过addAttribute传值
+ModelMap通过put和addAttribute传值
+ModelAndView通过addObject传值
+接收参数是封装对象是必需要有getter和setter,前端的参数个数可以和封装参数的属性个数不一样,但是如果写了就不能为空
+
+@ModelAttribute再@RequstMapping之前调用所以会先向request域中传一个值,@RequestMapping请求url,参数是pojo
+表单提交将产生一个key=参数类型首字母小写,value=
+如果用@SessionAttributes了@ModelAttribute修饰参数会优先从session域中取值
+覆盖了原有的request域中的值,所以取到的是表单和@ModelAttribute的混合
+
+@ModelAttribute会在当前类中任何方法调用之前调用,对前端传过来的值可以给前端未有的值赋值
+但是不能对已有值的参数进行修改
+@RequestMapping("/hello")
+public String function(Student s){
+    Student s=new Student("zs");
+    return "success";
+}
+
+@ModelAttribute("stu")返回值的key是stu,如果不给值就是返回值类型的首字母小写,value是函数的返回值
+如@ModelAttribute没有参数时返回值类型是Date;key就是date value就是返回值
+public Student function(Student s){
+    s.setName("zs");
+    return s;
+}
+
+会向model中添加一个key为stu和key为student(参数类型首字母小写)都指向s的键值对,jsp中可以通过el表达式获得
+@RequestMapping("/test")
+@ModelAttribute无参的可以不加
+public String function(@ModelAttribute("stu") Student s){
+向request域中添加key为stu,value为s的对象那个
+    system.out.println(s);拿到的值还是前端传过来的值并不是key为stu的值
+    s.setName("zs");
+    return "success";
+}
+
